@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Privado - Power BI</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background: url('https://media.bio.site/sites/a7cf8165-3ba2-478a-8108-f98fac889c65/iX4kWJuDwXhgEBQ3a7GEHg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+    /* --- LOGIN --- */
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 350px;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      width: 80%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #D9B300;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #b89600;
+    }
+
+    /* --- DASHBOARD MENU --- */
+    #menu {
+      display: none;
+      width: 100%;
+      max-width: 1100px;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    /* 🎨 TÍTULO PRINCIPAL DEL MENÚ */
+    #menu h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ffffff; /* Blanco */
+      font-size: 2.6em; /* Más grande */
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7); /* Efecto de brillo/sombra */
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .tile {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .tile h3 {
+      margin-bottom: 10px;
+      color: #D9B300;
+    }
+
+    .tile p {
+      color: #000;
+    }
+
+    iframe {
+      width: 95vw;
+      height: 90vh;
+      border: none;
+      display: block;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #volver {
+      display: block;
+      margin: 20px auto;
+      background: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="login" class="card">
+    <h2 style="color:#D9B300;">Acceso Privado</h2>
+    <p>Ingrese la contraseña para acceder</p>
+    <input type="password" id="clave" placeholder="Contraseña">
+    <br>
+    <button onclick="acceder()">Ingresar</button>
+    <p id="error" style="color:red; display:none;">Contraseña incorrecta</p>
+  </div>
+
+  <!-- MENÚ DE DASHBOARDS -->
+  <div id="menu">
+    <h1>Panel de Dashboards | Área Comercial</h1>
+    <div class="grid">
+      <div class="tile" onclick="abrirDashboard(0)">
+        <h3>Ventas Comerciales - Report</h3>
+        <p>Resumen de ventas y análisis (facturado)</p>
+      </div>
+      <div class="tile" onclick="abrirDashboard(1)">
+        <h3>Ventas Comerciales - Toma Pedido</h3>
+        <p>Resumen de ventas a tiempo real (facturado y pendiente)</p>
+      </div>
+      <div class="tile" onclick="abrirDashboard(2)">
+        <h3>Análisis de Clientes</h3>
+        <p>Detalle de compra de Clientes</p>
+      </div>
+      <div class="tile" onclick="abrirDashboard(3)">
+        <h3>Control de OC y Stock de tienda</h3>
+        <p>Seguimiento de OC y stock de vehículos</p>
+      </div>
+      <div class="tile" onclick="abrirDashboard(4)">
+        <h3>Informe de AAP</h3>
+        <p>Análisis de competencia en margen del AAP</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD (IFRAME) -->
+  <div id="dashboard" style="display:none;">
+    <button id="volver" onclick="volverMenu()">← Volver al menú</button>
+    <iframe id="iframe" allowFullScreen="true"></iframe>
+  </div>
+
+  <script>
+    const passwordCorrecta = "MiClave123";
+
+    const linksCifrados = [
+      "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5",
+      "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pT0dNd01tVTRPVGN0TURSbE1TMDBNVFprTFdJNVlURXRNbUZtTm1FNVl6QmtOVGRtSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5",
+      "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTkRVMVpXSTVPVFl0TVRnMlpTMDBNVGMxTFRsaVlqSXRPREJsTjJJMk1qRTVNMkl3SWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5",
+      "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTldNd09ETXdOR1F0WmpFMU9TMDBPR0UzTFRrNFltSXRaakZsTWpJeE1EaGpOMk5rSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5JnBhZ2VOYW1lPWU4OWJjODdjMzk0NWUxODA4OTYy",
+      "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTnpZNE5ESXpZMll0T0RBNFlTMDBORGt3TFRrME1tRXRORGsyWlRobVpEVTROMlEzSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5JnBhZ2VOYW1lPWQ4MDkwNTAzMDc0MmU0MDYxZWNh"
+    ];
+
+    let linksDescifrados = [];
+
+    function acceder() {
+      const clave = document.getElementById("clave").value;
+      if (clave === passwordCorrecta) {
+        linksDescifrados = linksCifrados.map(c => atob(c));
+        document.getElementById("login").style.display = "none";
+        document.getElementById("menu").style.display = "block";
+      } else {
+        document.getElementById("error").style.display = "block";
+      }
+    }
+
+    function abrirDashboard(index) {
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+      document.getElementById("iframe").src = linksDescifrados[index];
+    }
+
+    function volverMenu() {
+      document.getElementById("iframe").src = "";
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("menu").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
