@@ -163,7 +163,10 @@
   </div>
 
   <script>
-    const passwordCorrecta = "MiClave123";
+    // --- Contraseña ofuscada (fragmentada y en Base64) ---
+    // Aquí está la contraseña dividida en partes Base64 para dificultar su lectura directa.
+    const _p_parts = ["TWlD","bGF2","ZTEy","Mw=="]; //
+    function _getPassword(){ return atob(_p_parts.join('')); }
 
     const linksCifrados = [
       "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5",
@@ -177,6 +180,8 @@
 
     function acceder() {
       const clave = document.getElementById("clave").value;
+      // obtén la contraseña real en tiempo de ejecución (no está en texto plano en el archivo)
+      const passwordCorrecta = _getPassword();
       if (clave === passwordCorrecta) {
         linksDescifrados = linksCifrados.map(c => atob(c));
         document.getElementById("login").style.display = "none";
