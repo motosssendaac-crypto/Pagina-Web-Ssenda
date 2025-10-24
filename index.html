@@ -157,7 +157,7 @@
     </div>
   </div>
 
-  <!-- DASHBOARD (IFRAME) -->
+  <!-- DASHBOARD -->
   <div id="dashboard" style="display:none;">
     <button id="volver" onclick="volverMenu()">← Volver al menú</button>
     <iframe id="iframe" allowFullScreen="true"></iframe>
@@ -180,7 +180,7 @@
 
     function acceder() {
       const clave = document.getElementById("clave").value;
-      // obtén la contraseña real en tiempo de ejecución (no está en texto plano en el archivo)
+      
       const passwordCorrecta = _getPassword();
       if (clave === passwordCorrecta) {
         linksDescifrados = linksCifrados.map(c => atob(c));
@@ -207,6 +207,7 @@
 </body>
 
 </html>
+
 
 
 
