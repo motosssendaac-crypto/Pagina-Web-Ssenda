@@ -7,20 +7,35 @@
   <style>
     body {
       font-family: "Segoe UI", Arial, sans-serif;
-      background: #f4f4f4;
+      background-image: url('https://media.bio.site/sites/a7cf8165-3ba2-478a-8108-f98fac889c65/iX4kWJuDwXhgEBQ3a7GEHg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      color: #333;
+    }
+
+    /* Fondo difuminado para formularios y paneles */
+    .card, #menu, #dashboard {
+      background: rgba(255, 255, 255, 0.93);
+      backdrop-filter: blur(4px);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      padding: 30px;
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      text-align: center;
       width: 320px;
     }
 
@@ -30,6 +45,7 @@
       margin: 8px 0;
       border-radius: 8px;
       border: 1px solid #ccc;
+      font-size: 1em;
     }
 
     button {
@@ -40,16 +56,23 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      transition: 0.3s;
     }
 
     button:hover {
       background: #b89c00;
+      transform: scale(1.03);
     }
 
     #menu, #dashboard {
       display: none;
       width: 90%;
       max-width: 1100px;
+    }
+
+    h2 {
+      color: #D9B300;
+      margin-bottom: 15px;
     }
 
     .grid {
@@ -78,12 +101,16 @@
       height: 80vh;
       border: none;
       border-radius: 12px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
     }
 
     .back-btn {
       background: #555;
       margin-top: 15px;
+    }
+
+    .back-btn:hover {
+      background: #333;
     }
   </style>
 </head>
@@ -91,7 +118,7 @@
 
   <!-- LOGIN -->
   <div id="login" class="card">
-    <h2 style="color:#D9B300;">Acceso Privado</h2>
+    <h2>Acceso Privado</h2>
     <p>Ingrese sus credenciales</p>
     <input type="text" id="usuario" placeholder="Usuario">
     <input type="password" id="clave" placeholder="Contraseña">
@@ -102,7 +129,7 @@
 
   <!-- MENÚ PRINCIPAL -->
   <div id="menu">
-    <h2 style="color:#D9B300;">Panel de Power BI</h2>
+    <h2>Panel de Power BI</h2>
     <div class="grid"></div>
   </div>
 
@@ -149,11 +176,9 @@
       ]
     };
 
-    // --- VARIABLES GLOBALES ---
     let rolActual = null;
     let linksDescifrados = [];
 
-    // --- ACCESO ---
     function acceder() {
       const usuario = document.getElementById("usuario").value.trim();
       const clave = document.getElementById("clave").value.trim();
@@ -176,7 +201,6 @@
       }
     }
 
-    // --- MOSTRAR DASHBOARDS POR ROL ---
     function mostrarMenuPorRol(rol) {
       const contenedor = document.querySelector(".grid");
       contenedor.innerHTML = "";
@@ -190,19 +214,17 @@
         const tile = document.createElement("div");
         tile.className = "tile";
         tile.onclick = () => abrirDashboard(i);
-        tile.innerHTML = `<h3>${d.t}</h3><p>${d.d}</p>`;
+        tile.innerHTML = `<h3 style="color:#D9B300;">${d.t}</h3><p>${d.d}</p>`;
         contenedor.appendChild(tile);
       });
     }
 
-    // --- ABRIR DASHBOARD ---
     function abrirDashboard(index) {
       document.getElementById("menu").style.display = "none";
       document.getElementById("dashboard").style.display = "block";
       document.getElementById("iframe").src = linksDescifrados[index];
     }
 
-    // --- VOLVER AL MENÚ ---
     function volverMenu() {
       document.getElementById("iframe").src = "";
       document.getElementById("dashboard").style.display = "none";
