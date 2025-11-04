@@ -1,141 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Panel Power BI - Acceso Privado</title>
   <style>
-  body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background-image: url('https://media.bio.site/sites/a7cf8165-3ba2-478a-8108-f98fac889c65/iX4kWJuDwXhgEBQ3a7GEHg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: #333;
-  }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-image: url('https://media.bio.site/sites/a7cf8165-3ba2-478a-8108-f98fac889c65/iX4kWJuDwXhgEBQ3a7GEHg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #333;
+    }
 
-  /* Fondo difuminado solo para formularios y tarjetas, no para el contenedor */
-  .card {
-    background: rgba(255, 255, 255, 0.93);
-    backdrop-filter: blur(4px);
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    padding: 30px;
-    text-align: center;
-    animation: fadeIn 0.6s ease-in-out;
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
-  /* Quitamos fondo blanco del contenedor general */
-  #menu, #dashboard {
-    display: none;
-    width: 90%;
-    max-width: 1100px;
-    background: none !important;
-    box-shadow: none !important;
-  }
+    /* CARD (login) - fondo difuminado */
+    .card {
+      background: rgba(255, 255, 255, 0.93);
+      backdrop-filter: blur(4px);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      padding: 30px;
+      text-align: center;
+      animation: fadeIn 0.6s ease-in-out;
+      width: 320px;
+    }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
-  }
+    /* Específico: título dentro del login */
+    #login h2 {
+      color: #D9B300;            /* color dorado para "Acceso Privado" */
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      letter-spacing: 0.6px;
+    }
 
-  .card {
-    width: 320px;
-  }
+    /* Quitamos fondo blanco del contenedor general (#menu y #dashboard) */
+    #menu, #dashboard {
+      display: none;
+      width: 90%;
+      max-width: 1100px;
+      background: none !important; /* sin bloque blanco */
+      box-shadow: none !important;
+      padding: 10px 20px;
+    }
 
-  input {
-    width: 90%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-  }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
 
-  button {
-    background: #D9B300;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-  }
+    button {
+      background: #D9B300;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
 
-  button:hover {
-    background: #b89c00;
-    transform: scale(1.03);
-  }
+    button:hover {
+      background: #b89c00;
+      transform: scale(1.02);
+    }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-  }
+    /* Título principal del menú (ahora blanco y grande) */
+    #menu h2 {
+      color: #ffffff;
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 10px;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+      position: relative;
+    }
 
-  .tile {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-    cursor: pointer;
-  }
+    /* Línea amarilla decorativa debajo del título */
+    #menu h2::after {
+      content: "";
+      display: block;
+      width: 140px;
+      height: 4px;
+      background-color: #D9B300;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
 
-  .tile:hover {
-    transform: scale(1.03);
-    background: #fffbe6;
-  }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
 
-  iframe {
-    width: 100%;
-    height: 80vh;
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
-  }
+    /* Tarjetas individuales (estas sí conservan fondo blanco) */
+    .tile {
+      background: rgba(255,255,255,0.98);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: transform 0.18s, box-shadow 0.18s;
+      cursor: pointer;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-  .back-btn {
-    background: #555;
-    margin-top: 15px;
-  }
+    .tile h3 {
+      color: #D9B300; /* título de cada tarjeta */
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
 
-  .back-btn:hover {
-    background: #333;
-  }
+    .tile p {
+      margin: 0;
+      color: #333;
+    }
 
-  /* --- TÍTULO PRINCIPAL DEL PANEL --- */
-  #menu h2 {
-    color: #ffffff;
-    text-align: center;
-    font-size: 36px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    position: relative;
-  }
+    .tile:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      background: #fffbe6;
+    }
 
-  /* Línea decorativa debajo del título */
-  #menu h2::after {
-    content: "";
-    display: block;
-    width: 120px;
-    height: 4px;
-    background-color: #D9B300;
-    margin: 10px auto 0;
-    border-radius: 2px;
-  }
-</style>
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
 
+    .back-btn {
+      background: #555;
+      margin-top: 15px;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .back-btn:hover { background: #333; }
+  </style>
 </head>
 <body>
 
@@ -145,9 +175,9 @@
     <p>Ingrese sus credenciales</p>
     <input type="text" id="usuario" placeholder="Usuario">
     <input type="password" id="clave" placeholder="Contraseña">
-    <br>
+    <br><br>
     <button onclick="acceder()">Ingresar</button>
-    <p id="error" style="color:red; display:none;">Usuario o contraseña incorrectos</p>
+    <p id="error" style="color:red; display:none; margin-top:10px;">Usuario o contraseña incorrectos</p>
   </div>
 
   <!-- MENÚ PRINCIPAL -->
@@ -164,51 +194,59 @@
   </div>
 
   <script>
-    // --- FUNCIONES DE SEGURIDAD ---
+    // decodificar base64 (links)
     function decodificar(texto) { return atob(texto); }
+    // codificar base64 (para comparar inputs con los valores guardados)
+    function codificar(texto) { return btoa(texto); }
 
-    // --- USUARIOS Y CONTRASEÑAS CIFRADAS ---
+    // --- USUARIOS Y CONTRASEÑAS (ALMACENADOS EN BASE64) ---
+    // Formato: { u: "<usuario_en_base64>", p: "<password_en_base64>", rol: "..." }
     const usuariosCifrados = [
-      { u: "YWRtaW4=", p: "U1NlbmRhMjAyNQ==", rol: "admin" },       // admin : SSenda2025
-      { u: "Y29tZXJjaWFs", p: "VmVudGFzMjAyNQ==", rol: "comercial" }, // comercial : Ventas2025
-      { u: "bWFya2V0aW5n", p: "Q29tZXJjaWFsTWF4", rol: "marketing" }, // marketing : ComercialMax
-      { u: "YW5hbHl0aWNv", p: "QmlQYW5lbDIwMjU=", rol: "analitico" }, // analitico : BiPanel2025
-      { u: "Z2VzdGlvbg==", p: "U2VuZGEyMDEw", rol: "gestion" }        // gestion : Senda2010
+      { u: "YWRtaW4=", p: "U1NlbmRhMjAyNQ==", rol: "admin" },       // admin (almacenado en base64)
+      { u: "Y29tZXJjaWFs", p: "VmVudGFzMjAyNQ==", rol: "comercial" }, // comercial
+      { u: "bWFya2V0aW5n", p: "Q29tZXJjaWFsTWF4", rol: "marketing" }, // marketing
+      { u: "YW5hbHl0aWNv", p: "QmlQYW5lbDIwMjU=", rol: "analitico" }, // analitico
+      { u: "Z2VzdGlvbg==", p: "U2VuZGEyMDEw", rol: "gestion" }        // gestion
     ];
 
     // --- DASHBOARDS CIFRADOS (por rol) ---
     const dashboardsPorRol = {
       admin: [
-        { t: "🟨 Ventas Comerciales - Report", d: "Resumen de ventas y análisis (facturado)", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
-        { t: "🟨 Control de OC y Stock", d: "Seguimiento de OC y stock de vehículos", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTldNd09ETXdOR1F0WmpFMU9TMDBPR0UzTFRrNFltSXRaakZsTWpJeE1EaGpOMk5rSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
-        { t: "🟨 Comparativo de Precios", d: "VS de precios mes a mes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pT1RjNU56VmxNbUV0TURReU5pMDBZalUzTFRobFltUXROamMwTnpjMU16UTVObUptSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
+        { t: "Ventas Comerciales - Report", d: "Resumen de ventas y análisis (facturado)", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
+        { t: "Control de OC y Stock", d: "Seguimiento de OC y stock de vehículos", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTldNd09ETXdOR1F0WmpFMU9TMDBPR0UzTFRrNFltSXRaakZsTWpJeE1EaGpOMk5rSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
+        { t: "Comparativo de Precios", d: "VS de precios mes a mes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pT1RjNU56VmxNbUV0TURReU5pMDBZalUzTFRobFltUXROamMwTnpjMU16UTVObUptSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ],
       comercial: [
-        { t: "🟨 Ventas Comerciales - Report", d: "Resumen de ventas y análisis (facturado)", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
-        { t: "🟨 Avance de Ventas", d: "Avance de ventas en soles y unidades", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTm1FMVpEaGpaVE10TkRBMk9TMDBOak16TFRsbE1ESXROalJrWVdRM01qZGhNalV5SWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
+        { t: "Ventas Comerciales - Report", d: "Resumen de ventas y análisis (facturado)", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
+        { t: "Avance de Ventas", d: "Avance de ventas en soles y unidades", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTm1FMVpEaGpaVE10TkRBMk9TMDBOak16TFRsbE1ESXROalJrWVdRM01qZGhNalV5SWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ],
       marketing: [
-        { t: "🟨 Informe de AAP", d: "Análisis de competencia y margen del AAP", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTnpZNE5ESXpZMll0T0RBNFlTMDBORGt3TFRrME1tRXRORGsyWlRobVpEVTROMlEzSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
-        { t: "🟨 Comparativo de Precios", d: "VS de precios mes a mes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pT1RjNU56VmxNbUV0TURReU5pMDBZalUzTFRobFltUXROamMwTnpjMU16UTVObUptSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
+        { t: "Informe de AAP", d: "Análisis de competencia y margen del AAP", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTnpZNE5ESXpZMll0T0RBNFlTMDBORGt3TFRrME1tRXRORGsyWlRobVpEVTROMlEzSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
+        { t: "Comparativo de Precios", d: "VS de precios mes a mes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pT1RjNU56VmxNbUV0TURReU5pMDBZalUzTFRobFltUXROamMwTnpjMU16UTVObUptSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ],
       analitico: [
-        { t: "🟨 Análisis de Clientes", d: "Detalle de compra de clientes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTkRVMVpXSTVPVFl0TVRnMlpTMDBNVGMxTFRsaVlqSXRPREJsTjJJMk1qRTVNMkl3SWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
+        { t: "Análisis de Clientes", d: "Detalle de compra de clientes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTkRVMVpXSTVPVFl0TVRnMlpTMDBNVGMxTFRsaVlqSXRPREJsTjJJMk1qRTVNMkl3SWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ],
       gestion: [
-        { t: "🟨 Control de OC y Stock", d: "Seguimiento de OC y stock de vehículos", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTldNd09ETXdOR1F0WmpFMU9TMDBPR0UzTFRrNFltSXRaakZsTWpJeE1EaGpOMk5rSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
+        { t: "Control de OC y Stock", d: "Seguimiento de OC y stock de vehículos", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTldNd09ETXdOR1F0WmpFMU9TMDBPR0UzTFRrNFltSXRaakZsTWpJeE1EaGpOMk5rSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ]
     };
 
+    // variables
     let rolActual = null;
     let linksDescifrados = [];
 
+    // ACCEDER: comparamos la versión en base64 del input con los valores almacenados
     function acceder() {
-      const usuario = document.getElementById("usuario").value.trim();
-      const clave = document.getElementById("clave").value.trim();
+      const usuarioInput = document.getElementById("usuario").value.trim();
+      const claveInput = document.getElementById("clave").value.trim();
+      const usuarioB64 = codificar(usuarioInput);
+      const claveB64 = codificar(claveInput);
+
       let accesoConcedido = false;
 
       for (const u of usuariosCifrados) {
-        if (usuario === decodificar(u.u) && clave === decodificar(u.p)) {
+        if (usuarioB64 === u.u && claveB64 === u.p) {
           rolActual = u.rol;
           accesoConcedido = true;
           break;
@@ -219,11 +257,13 @@
         mostrarMenuPorRol(rolActual);
         document.getElementById("login").style.display = "none";
         document.getElementById("menu").style.display = "block";
+        document.getElementById("error").style.display = "none";
       } else {
         document.getElementById("error").style.display = "block";
       }
     }
 
+    // mostrar menú según rol (desciframos solo los links)
     function mostrarMenuPorRol(rol) {
       const contenedor = document.querySelector(".grid");
       contenedor.innerHTML = "";
@@ -237,7 +277,7 @@
         const tile = document.createElement("div");
         tile.className = "tile";
         tile.onclick = () => abrirDashboard(i);
-        tile.innerHTML = `<h3 style="color:#D9B300;">${d.t}</h3><p>${d.d}</p>`;
+        tile.innerHTML = `<h3>${d.t}</h3><p>${d.d}</p>`;
         contenedor.appendChild(tile);
       });
     }
@@ -257,11 +297,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
