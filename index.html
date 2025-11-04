@@ -5,123 +5,137 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Power BI - Acceso Privado</title>
   <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-image: url('https://media.bio.site/sites/a7cf8165-3ba2-478a-8108-f98fac889c65/iX4kWJuDwXhgEBQ3a7GEHg.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: #333;
-    }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-image: url('https://media.bio.site/sites/a7cf8165-3ba2-478a-8108-f98fac889c65/iX4kWJuDwXhgEBQ3a7GEHg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #333;
+  }
 
-    /* Fondo difuminado solo para formularios y tarjetas, no para el contenedor */
-.card {
-  background: rgba(255, 255, 255, 0.93);
-  backdrop-filter: blur(4px);
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  padding: 30px;
-  text-align: center;
-  animation: fadeIn 0.6s ease-in-out;
-}
+  /* Fondo difuminado solo para formularios y tarjetas, no para el contenedor */
+  .card {
+    background: rgba(255, 255, 255, 0.93);
+    backdrop-filter: blur(4px);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    padding: 30px;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+  }
 
-/* Quitamos fondo blanco del contenedor general */
-#menu, #dashboard {
-  display: none;
-  width: 90%;
-  max-width: 1100px;
-  background: none !important; /* <--- esto elimina el cuadrado */
-  box-shadow: none !important;
-}
+  /* Quitamos fondo blanco del contenedor general */
+  #menu, #dashboard {
+    display: none;
+    width: 90%;
+    max-width: 1100px;
+    background: none !important;
+    box-shadow: none !important;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
-    .card {
-      width: 320px;
-    }
+  .card {
+    width: 320px;
+  }
 
-    input {
-      width: 90%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1em;
-    }
+  input {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
 
-    button {
-      background: #D9B300;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+  button {
+    background: #D9B300;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
 
-    button:hover {
-      background: #b89c00;
-      transform: scale(1.03);
-    }
+  button:hover {
+    background: #b89c00;
+    transform: scale(1.03);
+  }
 
-    #menu, #dashboard {
-      display: none;
-      width: 90%;
-      max-width: 1100px;
-    }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
 
-    h2 {
-      color: #D9B300;
-      margin-bottom: 15px;
-    }
+  .tile {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
+  .tile:hover {
+    transform: scale(1.03);
+    background: #fffbe6;
+  }
 
-    .tile {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-      cursor: pointer;
-    }
+  iframe {
+    width: 100%;
+    height: 80vh;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
 
-    .tile:hover {
-      transform: scale(1.03);
-      background: #fffbe6;
-    }
+  .back-btn {
+    background: #555;
+    margin-top: 15px;
+  }
 
-    iframe {
-      width: 100%;
-      height: 80vh;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    }
+  .back-btn:hover {
+    background: #333;
+  }
 
-    .back-btn {
-      background: #555;
-      margin-top: 15px;
-    }
+  /* --- TÍTULO PRINCIPAL DEL PANEL --- */
+  #menu h2 {
+    color: #ffffff;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    position: relative;
+  }
 
-    .back-btn:hover {
-      background: #333;
-    }
-  </style>
+  /* Línea decorativa debajo del título */
+  #menu h2::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 4px;
+    background-color: #D9B300;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+</style>
+
 </head>
 <body>
 
@@ -243,6 +257,7 @@
 
 </body>
 </html>
+
 
 
 
