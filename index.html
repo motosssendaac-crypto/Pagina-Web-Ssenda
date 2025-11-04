@@ -202,32 +202,33 @@
     // --- USUARIOS Y CONTRASEÑAS (ALMACENADOS EN BASE64) ---
     // Formato: { u: "<usuario_en_base64>", p: "<password_en_base64>", rol: "..." }
     const usuariosCifrados = [
-      { u: "YWRtaW4=", p: "U1NlbmRhMjAyNQ==", rol: "admin" },       // admin (almacenado en base64)
-      { u: "Y29tZXJjaWFs", p: "VmVudGFzMjAyNQ==", rol: "comercial" }, // comercial
-      { u: "bWFya2V0aW5n", p: "Q29tZXJjaWFsTWF4", rol: "marketing" }, // marketing
-      { u: "YW5hbHl0aWNv", p: "QmlQYW5lbDIwMjU=", rol: "analitico" }, // analitico
-      { u: "Z2VzdGlvbg==", p: "U2VuZGEyMDEw", rol: "gestion" }        // gestion
+      { u: "YWRtaW4=", p: "QUMyNUNPTUVSQ0lBTA==", rol: "AnnieSsenda2025" },       // admin (almacenado en base64)
+      { u: "Y29tZXJjaWFs", p: "RlIyNUNPTUVSQ0lBTA==", rol: "FreddySsenda2025" }, // comercial
+      { u: "bWFya2V0aW5n", p: "RVIyNUNPTUVSQ0lBTA==", rol: "EnriqueSsenda2025" }, // marketing
+      { u: "YW5hbHl0aWNv", p: "UEcyMDI1Q09NRVJDSUFM", rol: "PatriciaSsenda2025" }, // analitico
+      { u: "Z2VzdGlvbg==", p: "REEyNUNPTUVSQ0lBTA==", rol: "DanielSsenda2025" }        // gestion
     ];
 
     // --- DASHBOARDS CIFRADOS (por rol) ---
     const dashboardsPorRol = {
-      admin: [
+      AnnieSsenda2025: [
         { t: "🟨Ventas Comerciales - Report", d: "Resumen de ventas y análisis (facturado)", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
         { t: "🟨Control de OC y Stock", d: "Seguimiento de OC y stock de vehículos", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTldNd09ETXdOR1F0WmpFMU9TMDBPR0UzTFRrNFltSXRaakZsTWpJeE1EaGpOMk5rSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
         { t: "🟨Comparativo de Precios", d: "VS de precios mes a mes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pT1RjNU56VmxNbUV0TURReU5pMDBZalUzTFRobFltUXROamMwTnpjMU16UTVObUptSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ],
-      comercial: [
+      FreddySsenda2025: [
         { t: "🟨Ventas Comerciales - Report", d: "Resumen de ventas y análisis (facturado)", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
         { t: "🟨Avance de Ventas", d: "Avance de ventas en soles y unidades", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTm1FMVpEaGpaVE10TkRBMk9TMDBOak16TFRsbE1ESXROalJrWVdRM01qZGhNalV5SWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ],
-      marketing: [
+      EnriqueSsenda2025: [
         { t: "🟨Informe de AAP", d: "Análisis de competencia y margen del AAP", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTnpZNE5ESXpZMll0T0RBNFlTMDBORGt3TFRrME1tRXRORGsyWlRobVpEVTROMlEzSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
         { t: "🟨Comparativo de Precios", d: "VS de precios mes a mes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pT1RjNU56VmxNbUV0TURReU5pMDBZalUzTFRobFltUXROamMwTnpjMU16UTVObUptSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ],
-      analitico: [
+      PatriciaSsenda2025: [
         { t: "🟨Análisis de Clientes", d: "Detalle de compra de clientes", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTkRVMVpXSTVPVFl0TVRnMlpTMDBNVGMxTFRsaVlqSXRPREJsTjJJMk1qRTVNMkl3SWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ],
-      gestion: [
+      DanielSsenda2025: [
+        { t: "🟨Ventas Comerciales - Report", d: "Resumen de ventas y análisis (facturado)", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pWVRoaU4yTXdOekl0TUdNMk55MDBZV05qTFRobE16RXROVFJtWm1Fell6TXdNbVkxSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" },
         { t: "🟨Control de OC y Stock", d: "Seguimiento de OC y stock de vehículos", l: "aHR0cHM6Ly9hcHAucG93ZXJiaS5jb20vdmlldz9yPWV5SnJJam9pTldNd09ETXdOR1F0WmpFMU9TMDBPR0UzTFRrNFltSXRaakZsTWpJeE1EaGpOMk5rSWl3aWRDSTZJamt6TmpReFlqTm1MV1U1Tm1NdE5EazBPQzA0WkRJd0xUVmtNVFF6WlRaaVkyTmhPQ0o5" }
       ]
     };
@@ -297,7 +298,5 @@
 
 </body>
 </html>
-
-
 
 
