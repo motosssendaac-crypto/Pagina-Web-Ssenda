@@ -19,16 +19,25 @@
       color: #333;
     }
 
-    /* Fondo difuminado para formularios y paneles */
-    .card, #menu, #dashboard {
-      background: rgba(255, 255, 255, 0.93);
-      backdrop-filter: blur(4px);
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      padding: 30px;
-      text-align: center;
-      animation: fadeIn 0.6s ease-in-out;
-    }
+    /* Fondo difuminado solo para formularios y tarjetas, no para el contenedor */
+.card {
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(4px);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  padding: 30px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Quitamos fondo blanco del contenedor general */
+#menu, #dashboard {
+  display: none;
+  width: 90%;
+  max-width: 1100px;
+  background: none !important; /* <--- esto elimina el cuadrado */
+  box-shadow: none !important;
+}
 
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.96); }
@@ -234,4 +243,5 @@
 
 </body>
 </html>
+
 
